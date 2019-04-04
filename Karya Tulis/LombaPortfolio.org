@@ -1,0 +1,147 @@
+#+NAME: Merancang Emergency Response System Bencana Alam
+#+AUTHOR: Didik Hadumi Setiaji
+#+TODO: BELUM SEDANG | SELESAI BATAL
+#+PRIORITIES: A B C D
+* SELESAI [#A] Menentukan permasalahan
+Permasalahan sudah ditentukan dan hasilnya permasalahan yang diambil adalah bagaimana merancang Emergency Response System untuk mengatasi kurangnya informasi dalam penanganan bencana alam tersebut
+* SEDANG [#A] Menentukan bencana alam
+- Bencana alam meteorologi
+  - Banjir
+  - Kekeringan
+  - Badai tropis (Cyclone, Hurricane, Typhon)
+
+- Bencana alam geologi
+  - Gempa bumi
+  - Tsunami
+  - Tanah longsor
+  - Gunung meletus
+
+- Wabah
+  - Penyakit menular
+
+* SEDANG [#A] Studi Literatur tentang bencana alam
+Mencari terobosan pemerintah yang sudah diusahakan untuk tiap bencana atau Emergency Response System
+- [0/3] Gempa Bumi
+  1. [ ] ERS yang sudah ada
+     1. BMKG hanya mengandalkan seismometer untuk mendeteksi gempa dan tsunami
+	 Menurut Mulyono Prabowo, Deputi Bidang Meteorologi BMKG, BMKG menggunakan alat yang sama untuk mendeteksi gempa dan tsunami di Indonesia. Tsunami bukanlah fenomena yang terjadi dengan sendirinya.
+	 Penyebab utamanya adalah gempa bumi, selain letusan gunung berapi. Untuk mendeteksinya, BMKG memiliki 33 stasiun geofisika dengan 285 seismometer atau alat untuk mendeteksi titik asal gempa.
+     2. Sistem pendeteksian tsunami di Indonesia tak menggunakan perangkat khusus 
+	 Adapun, sistem pendeteksian tsunami di Indonesia sekadar menggunakan sistem kelanjutan pada sistem pendeteksian gempa.
+     3. Sesungguhnya, pendeteksi tsunami di lautan juga diperlukan
+        Untuk mendeteksi tsunami di lautan, diperlukan Deep-Ocean Assessment and Reporting of Tsunami (DART). Sistem ini menempatkan pelampung khusus, yaitu Deep-Ocean Tsunami Detection Buoys atau biasa disebut buoy. Sistem ini berguna untuk mendeteksi perubahan level permukaan air laut.
+     4. Deep Ocean Tsunami Detection Buoys
+        Untuk mendeteksi tsunami di lautan, diperlukan Deep-Ocean Assessment and Reporting of Tsunami (DART). Sistem ini menempatkan pelampung khusus, yaitu Deep-Ocean Tsunami Detection Buoys atau biasa disebut buoy. Sistem ini berguna untuk mendeteksi perubahan level permukaan air laut.
+	A typical tsunami buoy system comprises two components; the pressure sensor anchored to the sea floor and the surface buoy. The sensor on the sea floor measures the change in height of the water column above by measuring associated changes in the water pressure. This water column height is communicated to the surface buoy by acoustic telemetry and then relayed via satellite to the tsunami warning centre.
+	The system has two modes - 'standard' and 'event'. The system generally operates in 'standard' mode, where it routinely collects sea level information and reports via satellite at relatively low frequency transmission intervals (i.e. every 15 minutes). This helps to conserve battery life and hence extend the deployment life. The tsunami buoy is triggered into 'event' mode when the pressure sensor first detects the faster moving seismic wave moving through the sea floor. It then commences reporting sea level information at one minute intervals to enable rapid verification of the possible existence of a tsunami. The system returns to standard mode after 4 hours if no further seismic events are detected.
+	Data from Australia's tsunami detection buoys are made freely available to the international community and the tsunami warning centres of other countries in real-time using the World Meteorological Organization's dedicated Global Telecommunication System (WMO GTS). ( source  : http://www.bom.gov.au/tsunami/about/detection_buoys.shtml, 4/4/2019 )
+	[[./1.gif]]
+	
+  2. [ ] Kelebihan sistem ERS
+  3. [ ] Kekurangan sistem ERS
+     
+- [0/3] Banjir
+  - [ ] ERS yang sudah ada
+  - [ ] Kelebihan sistem ERS
+  - [ ] Kekurangan sistem ERS
+    
+- [0/3] Kebakaran Hutan
+  - [ ] ERS yang sudah ada
+  - [ ] Kelebihan sistem ERS
+  - [ ] Kekurangan sistem ERS
+
+* Outline Sistem untuk bencana alam Gempa Bumi
+Merancang Emergency Response System Gempa
+menggunakan sensor MPU9250,
+modul IoT MCU yang digunakan : ESP8266 MCU WEMOS B1
+Buzzer : 220V AC
+
+Cara kerja
+MPU9250 akan mengukur pergerakan pada koordinat X, Y, Z
+kemudian selisih nya akan digunakan untuk mengukur
+1. Getaran dengan memperhitungkan ukuran realtime dari X, Y, dan Z
+dX + dY merupakan getaran Horizontal
+dZ merupakan getaran Vertikal
+dF = dX + dY + dZ untuk memperhitungkan kemungkinan jenis gempa
+Jenis gempa yang akan diukur : 
+1. Gempa skala 4.0 Richter atau lebih
+memiliki magnitude dF tinggi tidak tergantung ukuran koordinat
+2. Gempa Strike Slip (Horizontal)
+Memiliki magnitude horizontal tinggi
+3. Gempa Faulting/Thrust (Vertikal)
+Memiliki magnitude vertikal tinggi
+4. Liquifikasi tanah
+Memiliki karakteristik perubahan kontur bumi
+ukurannya terhadap referensi posisi tanah awal
+5. Longsor
+Memiliki karakteristik getaran rendah namun
+memiliki selisih kecil terhadap referensi posisi tanah awal
+
+Semakin tinggi tempatnya semakin bagus
+
+Sistem
+
+(*) -> AP -> Static -> Android -> (*)
+(*) -> AP -> Modul -> (*)
+Modul+LoRa -> LoRA Base Station -> LoRa Mobile Station
+
+Software
+Android
+Spesifik -> IPModul
+
+Data dari Modul di akuisisi secara real time di server
+
+Latar belakang
+Gempa, Emergency Response System.
+* Outline sistem untuk bencana alam Banjir
+* Pseudecode untuk sistem
+#+NAME: Pseudecode sistem ERS Gempa
+#+AUTHOR: Didik Hadumi Setiaji
+#+BEGIN_SRC c++
+class horz {
+  void high();
+  void mid();
+  void low();
+};
+
+float x0 = sens.x(),
+  x1 = 0,
+  y0 = sens.y(),
+  y1 = 0,
+  z0 = sen.y(),
+  z1 = 0;
+
+void loop() {
+  float dx = x1 - x0;
+  return dx;
+  float dy = y1 - d0;
+  return dy;
+  float dz = z1 - z1;
+  return dz;
+}
+switch(dx) {
+ case 100.0 ... 1000.0:
+   horz.high();
+   break;
+ case 10.0 ... 100.0:
+   horz.mid();
+   break;
+ case 1.0 ... 10.0:
+ hoz.low();
+   break;
+ }
+#+END_SRC
+
+#+NAME: Pseudecode sistem ERS Banjir
+#+BEGIN_SRC c++
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-preserve-indentation nil
+org-edit-src-content-indentation 0)
+#+END_SRC
+
+#+CAPTION: Gambar Detection Buoys
+#+NAME: fig:DTBOY1
+[[./1.gif]]
