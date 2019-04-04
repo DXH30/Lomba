@@ -1,0 +1,42 @@
+Merancang Emergency Response System Gempa
+menggunakan sensor MPU9250,
+modul IoT MCU yang digunakan : ESP8266 MCU WEMOS B1
+Buzzer : 220V AC
+
+Cara kerja
+MPU9250 akan mengukur pergerakan pada koordinat X, Y, Z
+kemudian selisih nya akan digunakan untuk mengukur
+1. Getaran dengan memperhitungkan ukuran realtime dari X, Y, dan Z
+dX + dY merupakan getaran Horizontal
+dZ merupakan getaran Vertikal
+dF = dX + dY + dZ untuk memperhitungkan kemungkinan jenis gempa
+Jenis gempa yang akan diukur : 
+1. Gempa skala 4.0 Richter atau lebih
+memiliki magnitude dF tinggi tidak tergantung ukuran koordinat
+2. Gempa Strike Slip (Horizontal)
+Memiliki magnitude horizontal tinggi
+3. Gempa Faulting/Thrust (Vertikal)
+Memiliki magnitude vertikal tinggi
+4. Liquifikasi tanah
+Memiliki karakteristik perubahan kontur bumi
+ukurannya terhadap referensi posisi tanah awal
+5. Longsor
+Memiliki karakteristik getaran rendah namun
+memiliki selisih kecil terhadap referensi posisi tanah awal
+
+Semakin tinggi tempatnya semakin bagus
+
+Sistem
+
+(*) -> AP -> Static -> Android -> (*)
+(*) -> AP -> Modul -> (*)
+Modul+LoRa -> LoRA Base Station -> LoRa Mobile Station
+
+Software
+Android
+Spesifik -> IPModul
+
+Data dari Modul di akuisisi secara real time di server
+
+Latar belakang
+Gempa, Emergency Response System.
